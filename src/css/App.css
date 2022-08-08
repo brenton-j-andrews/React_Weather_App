@@ -35,3 +35,8 @@ p, h1, h2, h3, h4, h5 {
   width: 100%;
   font-family: Roboto-Light;
 }
+
+/* || Basic weather styling */
+.basic-weather-sp {
+  font-size: 18px;
+}

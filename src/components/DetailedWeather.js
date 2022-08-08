@@ -12,8 +12,7 @@ const DetailedWeatherDiv = styled.div`
 const DetailedWeather = () => {
     return (
         <DetailedWeatherDiv >
-            <p> Scattered Clouds </p>
-            <p> This is another thing.</p>
+            <p> This is detailed info!</p>
         </DetailedWeatherDiv>
     )
 }

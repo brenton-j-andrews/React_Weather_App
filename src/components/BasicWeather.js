@@ -10,12 +10,32 @@ const BasicWeatherDiv = styled.div`
     padding: 15px;
 `
 
-const BasicWeather = () => {
+const TextSmall = styled.p`
+    font-size: 14px;
+`
+
+const TextMedium = styled.p`
+    font-size: 18px;
+    margin: 5px 0px 5px 0px;
+`
+
+const TextLarge = styled.p`
+    font-size: 48px;
+`
+
+const BasicWeather = ({
+
+    data
+
+}) => {
+
     return (
         <BasicWeatherDiv >
-            <h4> Scattered Clouds </h4>
-            <p> Salt Lake City, USA </p>
-            <p> This is another thing.</p>
+            <h4> { data.weather[0].main } </h4>
+            <TextMedium> {data.name }</TextMedium>
+            <TextSmall> { data.dt } </TextSmall>
+            <TextSmall> { data.dt }</TextSmall>
+            <TextLarge> { data.main.temp } </TextLarge>
         </BasicWeatherDiv>
     )
 }
