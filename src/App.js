@@ -6,15 +6,19 @@ import BasicWeather from "./components/BasicWeather";
 import DetailedWeather from "./components/DetailedWeather";
 import './css/App.css';
 
-const key = "http://api.openweathermap.org/data/2.5/weather?q=Boston&units=imperial&APPID=40117561b027d65aef26e6f9f3621abe";
+let city = "Boston";
+let units = ["imperial", "metric"];
+
+
+const key = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units[0]}&APPID=40117561b027d65aef26e6f9f3621abe`;
 
 
 const App = () => {
 
-  const [data, setData ] = useState();
+  console.log(process.env.API_KEY);
+  const [currentWeather, setCurrentWeather ] = useState();
 
-  const fetchData = async() => {
-    console.log("am i here");
+  const fetchCurrentWeather = async() => {
     const response = await fetch(key);
     if (!response.ok) {
         throw new Error('Data could not be fetched.')
@@ -24,10 +28,10 @@ const App = () => {
   }
 
   useEffect(() => {
-    fetchData()
+    fetchCurrentWeather()
     .then((res) => {
         console.log(res);
-        setData(res);
+        setCurrentWeather(res);
     })
     .catch((e) => {
         console.log(e.message)
@@ -35,19 +39,23 @@ const App = () => {
   }, [])
 
 
-  if (data) {
+  if (currentWeather) {
     return (
       <div className='App-wrapper'>
-        <div className="Upper-wrappper">
-          {data && (
-            <BasicWeather data = { data } /> )
-          }
 
-          <DetailedWeather />
-        </div>
+        {currentWeather && (
+          <div className="Upper-wrappper">
+            <BasicWeather 
+            data = { currentWeather } 
+            /> 
+            <DetailedWeather  
+            data = { currentWeather }
+            />
+          </div>
+        )}
+
     </div>
-  )
-  }
+  )}
 }
 
 export default App;

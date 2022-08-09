@@ -25,11 +25,7 @@ const TextLarge = styled.p`
     font-size: 48px;
 `
 
-const BasicWeather = ({
-
-    data
-
-}) => {
+const BasicWeather = ({ data }) => {
 
     // Parse Data.
     let weather_type = data.weather[0].main;
