@@ -65,3 +65,6 @@ export default function Test() {
   //       console.log(e.message)
   //   })
   // }, [])
+
+
+//     let forecast_weather_key = `api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lon}&appid=${api_key}`;

@@ -6,7 +6,7 @@ const ForecastDiv = styled.div`
     bottom: 0;
 `
 
-const Forecast = () => {
+const Forecast = ({ data }) => {
     return (
         <ForecastDiv >
             <p> Hello from forecast! </p>
