@@ -22,6 +22,7 @@ export default function Test() {
             console.log(res);
             setData(res);
         })
+
         .catch((e) => {
             console.log(e.message)
         })
@@ -40,3 +41,27 @@ export default function Test() {
 
 
 
+
+// JUNKYARD!!!
+
+// const fetchCurrentWeather = async() => {
+  //   const response = await fetch(current_weather_key);
+  //   console.log(response);
+  //   if (!response.ok) {
+  //       throw new Error('Data could not be fetched.')
+  //   } else {
+  //       return response.json();
+  //   }
+  // }
+
+  // // Use effect for current weather data.
+  // useEffect(() => {
+  //   fetchCurrentWeather()
+  //   .then((res) => {
+  //       console.log(res);
+  //       setCurrentWeather(res);
+  //   })
+  //   .catch((e) => {
+  //       console.log(e.message)
+  //   })
+  // }, [])

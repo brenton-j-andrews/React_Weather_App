@@ -6,37 +6,34 @@ import BasicWeather from "./components/BasicWeather";
 import DetailedWeather from "./components/DetailedWeather";
 import './css/App.css';
 
-let city = "Boston";
-let units = ["imperial", "metric"];
 
-
-const key = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units[0]}&APPID=40117561b027d65aef26e6f9f3621abe`;
+let api_key = '40117561b027d65aef26e6f9f3621abe';
 
 
 const App = () => {
 
-  console.log(process.env.API_KEY);
-  const [currentWeather, setCurrentWeather ] = useState();
+  let city = "Salt Lake City";
+  const units = ["imperial", "metric"];
+  let current_weather_key = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units[0]}&APPID=${api_key}`;
 
-  const fetchCurrentWeather = async() => {
-    const response = await fetch(key);
-    if (!response.ok) {
-        throw new Error('Data could not be fetched.')
-    } else {
-        return response.json();
-    }
+  const [ currentWeather, setCurrentWeather ] = useState();
+
+  function FetchCurrentWeather() {
+    useEffect(() => {
+      async function fetchCurrentWeatherData() {
+        const response = await fetch(current_weather_key);
+        const fetchedData = await response.json();
+        setCurrentWeather(fetchedData);
+      }
+
+      fetchCurrentWeatherData();
+    }, []);
   }
 
-  useEffect(() => {
-    fetchCurrentWeather()
-    .then((res) => {
-        console.log(res);
-        setCurrentWeather(res);
-    })
-    .catch((e) => {
-        console.log(e.message)
-    })
-  }, [])
+  FetchCurrentWeather();
+
+
+
 
 
   if (currentWeather) {
