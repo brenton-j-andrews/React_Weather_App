@@ -1,49 +1,53 @@
 import React, { useEffect, useState } from "react";
-import env from "react-dotenv";
-import { useAsync } from "react-async";
-import Axios from "axios";
+
 
 // Import components and CSS.
 import BasicWeather from "./components/BasicWeather";
 import DetailedWeather from "./components/DetailedWeather";
-import Forecast from "./components/Forecast";
 import './css/App.css';
 
-let unit = "imperial";
-let city = "Boston";
-let api_url_current = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&APPID=${env.API_KEY}`;
-
+const key = "http://api.openweathermap.org/data/2.5/weather?q=Boston&units=imperial&APPID=40117561b027d65aef26e6f9f3621abe";
 
 
 const App = () => {
 
-  const [data, setData ] = useState([]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const [data, setData ] = useState();
 
   const fetchData = async() => {
-    const response = await Axios(api_url_current, { mode: 'cors' });
-    setData(response.data);
+    console.log("am i here");
+    const response = await fetch(key);
+    if (!response.ok) {
+        throw new Error('Data could not be fetched.')
+    } else {
+        return response.json();
+    }
   }
 
+  useEffect(() => {
+    fetchData()
+    .then((res) => {
+        console.log(res);
+        setData(res);
+    })
+    .catch((e) => {
+        console.log(e.message)
+    })
+  }, [])
 
-  
-  return (
+
+  if (data) {
+    return (
       <div className='App-wrapper'>
         <div className="Upper-wrappper">
-          { data && <BasicWeather data = { data } /> }
-     
-          
+          {data && (
+            <BasicWeather data = { data } /> )
+          }
+
           <DetailedWeather />
         </div>
     </div>
   )
+  }
 }
 
 export default App;
