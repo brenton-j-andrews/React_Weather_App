@@ -30,7 +30,7 @@ const BasicWeather = ({ data }) => {
     // Parse Data.
     let weather_type = data.weather[0].main;
     let location = `${data.name}, ${data.sys.country}`;
-    let date = fromUnixTime(data.dt).toLocaleDateString( 'en-US');
+    let date = fromUnixTime(data.dt).toLocaleDateString('en-US');
     let time = fromUnixTime(data.dt).toLocaleTimeString('en-US');
     let display_temp = `${Math.round(data.main.temp)}° F `;
     let icon_src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
