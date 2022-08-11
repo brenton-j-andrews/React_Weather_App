@@ -36,6 +36,7 @@ const App = () => {
 
   let city = "Salt Lake City";
   const units = "imperial";
+  const [ toggleForecast, setToggleForecast ] = useState(false);
   const [ currentWeather, setCurrentWeather ] = useState();
   const [ forecastWeather, setForecastWeather] =  useState();
 
@@ -67,6 +68,7 @@ const App = () => {
             data = { currentWeather } 
             /> 
             <DetailedWeather  
+            toggle = { toggleForecast}
             data = { currentWeather }
             />
           </div>

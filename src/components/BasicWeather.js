@@ -3,6 +3,12 @@ import styled from "styled-components";
 
 import fromUnixTime from 'date-fns/fromUnixTime'
 
+import {
+    TextSmall,
+    TextMedium,
+    TextLarge
+} from "../shared/Text";
+
 // Styled Components.
 const BasicWeatherDiv = styled.div`
     display: flex;
@@ -10,19 +16,6 @@ const BasicWeatherDiv = styled.div`
     align-items: flex-start;
     font-family: Roboto-Light;
     padding: 15px;
-`
-
-const TextSmall = styled.p`
-    font-size: 14px;
-`
-
-const TextMedium = styled.p`
-    font-size: 18px;
-    margin: 5px 0px 5px 0px;
-`
-
-const TextLarge = styled.p`
-    font-size: 48px;
 `
 
 const BasicWeather = ({ data }) => {
