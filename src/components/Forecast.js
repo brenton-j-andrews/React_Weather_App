@@ -24,6 +24,11 @@ const ForecastDiv = styled.div`
     display: flex;
     margin-top: 15px;
     width: 100%;
+    overflow-x: scroll;
+    scrollbar-color: red;
+    ::-webkit-scrollbar {
+        width: 30px;
+    }
 `
 
 const ForecastUnit = styled.div`
@@ -46,12 +51,14 @@ const Forecast = ({ data }) => {
 
         <ForecastWrapper>
             <button onClick={() => {setToggle(toggle => !toggle)}}> 
-                {toggle ? "Show Hourly" : "Show Daily"} 
+                {toggle ? "Show Hourly Forecast" : "Show Daily Forecast"} 
             </button>
+
+
 
             {toggle &&
                 <ForecastDiv >
-                    {data.map((daily_forecast) => {
+                    {data['daily'].map((daily_forecast) => {
                         return (
                             <ForecastUnit>
                                 <TextMedium> {util.unixToDayName(daily_forecast.dt)}</TextMedium>
@@ -66,13 +73,12 @@ const Forecast = ({ data }) => {
 
             {!toggle &&
                 <ForecastDiv >
-                    {data.map((daily_forecast) => {
+                    {data['hourly'].map((hourly_forecast) => {
                         return (
                             <ForecastUnit>
-                                <TextMedium> 1200 </TextMedium>
-                                <TextSmall> {Math.round(daily_forecast.temp.day)}° F  </TextSmall>
-                                <TextSmall> {Math.round(daily_forecast.temp.min)}° F  </TextSmall>
-                                <img  src={`http://openweathermap.org/img/wn/${daily_forecast.weather[0].icon}@2x.png`} alt="weather_icon"/>
+                                <TextMedium> {util.unixToTime(hourly_forecast.dt)} </TextMedium>
+                                <TextSmall> {Math.round(hourly_forecast.temp)}° F  </TextSmall>
+                                <img  src={`http://openweathermap.org/img/wn/${hourly_forecast.weather[0].icon}@2x.png`} alt="weather_icon"/>
                             </ForecastUnit>
                         )
                     })}

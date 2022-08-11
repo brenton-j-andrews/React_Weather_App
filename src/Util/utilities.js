@@ -9,6 +9,12 @@ function unixToDayName(timestamp) {
     return date;
 }
 
+function unixToTime(timestamp) {
+    let time = format(fromUnixTime(timestamp), 'HHmm');
+    return time;
+}
+
 export {
-    unixToDayName
+    unixToDayName,
+    unixToTime
 }
