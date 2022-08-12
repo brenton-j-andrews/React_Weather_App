@@ -18,7 +18,7 @@ const BasicWeatherDiv = styled.div`
     padding: 15px;
 `
 
-const BasicWeather = ({ data, searchSubmit, unitToggle, setUnitToggle}) => {
+const BasicWeather = ({ data, searchSubmit, unitToggle, setUnitToggle, error}) => {
 
     const [searchData, setSearchData ] = useState("");
 
@@ -63,6 +63,13 @@ const BasicWeather = ({ data, searchSubmit, unitToggle, setUnitToggle}) => {
                 value="Go!"
                 />
             </form>
+
+            {error.current && 
+                <div style={{ marginTop: 15}}>
+                    <TextSmall> Location not found. </TextSmall>
+                    <TextSmall> Enter your search as 'City', 'City, State' or 'City, Country' </TextSmall> 
+                </div>
+            }
 
         </BasicWeatherDiv>
     )
