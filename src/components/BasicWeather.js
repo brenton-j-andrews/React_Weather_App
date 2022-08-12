@@ -53,14 +53,14 @@ const BasicWeather = ({ data, searchSubmit, unitToggle, setUnitToggle, error}) =
                 <input 
                 name="search"
                 type="text"
-                placeholder="Search new location"
+                placeholder="  Search new location"
                 value={searchData}
                 onChange={e => setSearchData(e.target.value)}
                 />
 
                 <input
                 type="submit"
-                value="Go!"
+                value="Go"
                 />
             </form>
 
