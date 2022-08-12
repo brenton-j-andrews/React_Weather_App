@@ -50,3 +50,27 @@ p, h1, h2, h3, h4, h5 {
 ::-webkit-scrollbar {
   width: 30px;
 }
+
+.page-footer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+
+  bottom: 0;
+  margin-bottom: 25px;
+  width: 90%;
+  background-color: var(--primary-blue);
+  flex-shrink: 0;
+}
+
+.page-footer a, p {
+  font-size: 18px;
+  font-family: Roboto-Light;
+  color: white;
+  text-decoration: none;
+}
+
+.page-footer a:hover {
+  color: gray;
+}
+

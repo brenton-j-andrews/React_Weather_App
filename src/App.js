@@ -87,6 +87,9 @@ const App = () => {
         unitToggle = { unitToggle }
         />
 
+        <footer className="page-footer ">
+          <p> Copyright {new Date().getFullYear()} - Brenton Andrews - <a href="https://github.com/brenton-j-andrews/React_Weather_App"> GitHub </a></p>
+        </footer>
     </div>
   )}
 }
