@@ -41,6 +41,7 @@ const DailyUnit = styled.div`
     min-width: calc(100% / 7);
     height: 180px;
 `
+
 const HourlyUnit = styled(DailyUnit)`
     min-width: calc(100% / 8 + 1em);
 `
