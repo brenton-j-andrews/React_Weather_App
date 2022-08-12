@@ -2,7 +2,7 @@
 
 ![Demo_Image](src/Assets/Images/readme_image600.png)
 
-View the project live [here](www.google.com).
+View the project live [here](https://brenton-j-andrews.github.io/React_Weather_App/).
 
 -----
 #### About this project.
@@ -26,3 +26,11 @@ This project was built using React and Axios for fetching API data.
 This project gave me some experience with asynchronous programming in React, indroduced me to the Axios client, and gave me a better understanding of CSS horizontal scrolling for the hourly forecast data display.
 
 I need to learn some more about error handling when chaining API calls together (and error handling in general), styling browser scrollbars (spent a good amount of time trying to figure this out without any luck...) and best practices in React. 
+
+-----
+
+#### Todo
+
+- Learn more about insecure / mixed content. The deployed application is logging this as a warning.
+- Improve styling for longer monitors.
+- Add a higher resolution image for the README.
