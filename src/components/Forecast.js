@@ -8,6 +8,7 @@ import {
     TextMedium
 } from "../shared/Text";
 
+
 const ForecastWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -17,30 +18,31 @@ const ForecastWrapper = styled.div`
     position: absolute;
     bottom: 100px;
     width: 90%;
-    height: 250px;
+    height: 350px;
 `
 
-const ForecastDiv = styled.div`
+const DailyForecastDiv = styled.div`
     display: flex;
-    margin-top: 15px;
+    margin: 15px 0px 15px 0px;
     width: 100%;
-    overflow-x: scroll;
-    scrollbar-color: red;
-    ::-webkit-scrollbar {
-        width: 30px;
-    }
+
+    overflow-x: auto;
 `
 
-const ForecastUnit = styled.div`
+const DailyUnit = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 5px;
-    margin: 0px 5px 0px 5px;
     border: 3px solid white;
-    width: 140px;
+
+    box-sizing: border-box;
+    min-width: calc(100% / 7);
     height: 180px;
+`
+const HourlyUnit = styled(DailyUnit)`
+    min-width: calc(100% / 8 + 1em);
 `
 
 const Forecast = ({ data }) => {
@@ -54,35 +56,33 @@ const Forecast = ({ data }) => {
                 {toggle ? "Show Hourly Forecast" : "Show Daily Forecast"} 
             </button>
 
-
-
             {toggle &&
-                <ForecastDiv >
+                <DailyForecastDiv >
                     {data['daily'].map((daily_forecast) => {
                         return (
-                            <ForecastUnit>
+                            <DailyUnit>
                                 <TextMedium> {util.unixToDayName(daily_forecast.dt)}</TextMedium>
                                 <TextSmall> {Math.round(daily_forecast.temp.day)}° F  </TextSmall>
                                 <TextSmall> {Math.round(daily_forecast.temp.min)}° F  </TextSmall>
                                 <img  src={`http://openweathermap.org/img/wn/${daily_forecast.weather[0].icon}@2x.png`} alt="weather_icon"/>
-                            </ForecastUnit>
+                            </DailyUnit>
                         )
                     })}
-                </ForecastDiv>
+                </DailyForecastDiv>
             }
 
             {!toggle &&
-                <ForecastDiv >
+                <DailyForecastDiv >
                     {data['hourly'].map((hourly_forecast) => {
                         return (
-                            <ForecastUnit>
+                            <HourlyUnit>
                                 <TextMedium> {util.unixToTime(hourly_forecast.dt)} </TextMedium>
                                 <TextSmall> {Math.round(hourly_forecast.temp)}° F  </TextSmall>
                                 <img  src={`http://openweathermap.org/img/wn/${hourly_forecast.weather[0].icon}@2x.png`} alt="weather_icon"/>
-                            </ForecastUnit>
+                            </HourlyUnit>
                         )
                     })}
-                </ForecastDiv>
+                </DailyForecastDiv>
             }   
         </ForecastWrapper>
     )

@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-
 // Import components and CSS.
 import BasicWeather from "./components/BasicWeather";
 import DetailedWeather from "./components/DetailedWeather";
 import Forecast from "./components/Forecast";
 import './css/App.css';
 
-
-
 let api_key = '40117561b027d65aef26e6f9f3621abe';
-
 
 const App = () => {
 
