@@ -4,8 +4,7 @@ import styled from "styled-components";
 import {
     TextSmall,
     TextMedium,
-    TextLarge
-} from "../shared/Text";
+} from "../shared/SharedComponents";
 
 // Import images.
 import wind_icon  from "../Assets/Images/wind.png";
@@ -30,12 +29,12 @@ const WeatherBoxData = styled.div`
     margin-left: 15px;
 `
 
-const DetailedWeather = ({ data }) => {
+const DetailedWeather = ({ data, unitToggle }) => {
 
     // Parse data.
-    let wind_speed = Math.round(data.wind.speed);
+    let wind_speed = `${Math.round(data.wind.speed)} ${unitToggle ? "mph" : "m/s"}`;
     let humidity = data.main.humidity;
-    let feels_like = `${Math.round(data.main.feels_like)}`;
+    let feels_like = `${Math.round(data.main.feels_like)}° ${unitToggle ? "F" : "C"}`;
 
     return (
         <DetailedWeatherDiv >
@@ -44,7 +43,7 @@ const DetailedWeather = ({ data }) => {
                 <img src={humidity_icon} alt="humidity icon"/>
                 <WeatherBoxData>
                     <TextSmall> Feels like </TextSmall>
-                    <TextMedium> { feels_like }° F</TextMedium>
+                    <TextMedium> { feels_like }</TextMedium>
                 </WeatherBoxData>
             </WeatherBox>
 

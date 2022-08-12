@@ -5,8 +5,8 @@ import styled from "styled-components";
 
 import {
     TextSmall,
-    TextMedium
-} from "../shared/Text";
+    TextMedium,
+} from "../shared/SharedComponents";
 
 
 const ForecastWrapper = styled.div`
@@ -46,7 +46,7 @@ const HourlyUnit = styled(DailyUnit)`
     min-width: calc(100% / 8 + 1em);
 `
 
-const Forecast = ({ data }) => {
+const Forecast = ({ data, unitToggle }) => {
 
     const [ toggle, setToggle ] = useState(true);
 
@@ -63,8 +63,8 @@ const Forecast = ({ data }) => {
                         return (
                             <DailyUnit>
                                 <TextMedium> {util.unixToDayName(daily_forecast.dt)}</TextMedium>
-                                <TextSmall> {Math.round(daily_forecast.temp.day)}° F  </TextSmall>
-                                <TextSmall> {Math.round(daily_forecast.temp.min)}° F  </TextSmall>
+                                <TextSmall> {Math.round(daily_forecast.temp.day)}° {unitToggle ? "F" : "C"} </TextSmall>
+                                <TextSmall> {Math.round(daily_forecast.temp.min)}° {unitToggle ? "F" : "C"} </TextSmall>
                                 <img  src={`http://openweathermap.org/img/wn/${daily_forecast.weather[0].icon}@2x.png`} alt="weather_icon"/>
                             </DailyUnit>
                         )
@@ -78,7 +78,7 @@ const Forecast = ({ data }) => {
                         return (
                             <HourlyUnit>
                                 <TextMedium> {util.unixToTime(hourly_forecast.dt)} </TextMedium>
-                                <TextSmall> {Math.round(hourly_forecast.temp)}° F  </TextSmall>
+                                <TextSmall> {Math.round(hourly_forecast.temp)}° {unitToggle ? "F" : "C"} </TextSmall>
                                 <img  src={`http://openweathermap.org/img/wn/${hourly_forecast.weather[0].icon}@2x.png`} alt="weather_icon"/>
                             </HourlyUnit>
                         )

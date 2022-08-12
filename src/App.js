@@ -11,19 +11,27 @@ let api_key = '40117561b027d65aef26e6f9f3621abe';
 
 const App = () => {
 
-  let city = "Salt Lake City";
-  const units = "imperial";
+  const [ unitToggle, setUnitToggle ] = useState(false);
+  const [ searchCity, setSearchCity] = useState("Boston")
   const [ currentWeather, setCurrentWeather ] = useState();
   const [ forecastWeather, setForecastWeather] =  useState();
 
-  let current_weather_key = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&APPID=${api_key}`;
+  const units = unitToggle ? "imperial" : "metric"
+
+  // Change searchCity value from form in BasicWeather component.
+  const searchSubmit = (searchValue) => {
+    setSearchCity(searchValue);
+  }
+
+  // Construct initial API key.
+  let current_weather_key = `http://api.openweathermap.org/data/2.5/weather?q=${searchCity}&units=${units}&APPID=${api_key}`;
 
   useEffect(() => {
     axios.get(current_weather_key)
 
     .then(response => {
       setCurrentWeather(response.data);
-      return axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&units=imperial&appid=40117561b027d65aef26e6f9f3621abe`)
+      return axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&units=${units}&appid=40117561b027d65aef26e6f9f3621abe`)
     })
 
     .then((response) => {
@@ -32,11 +40,10 @@ const App = () => {
         'daily': response.data.daily.slice(0, -1),
         'hourly': response.data.hourly.slice(0, 12)
       }
-      console.log(data);
       setForecastWeather(data);
     })
   
-  }, [])
+  }, [searchCity, unitToggle])
 
   if (currentWeather && forecastWeather) {
 
@@ -45,17 +52,24 @@ const App = () => {
 
         {currentWeather && (
           <div className="Upper-wrappper">
+
             <BasicWeather 
             data = { currentWeather } 
+            searchSubmit = { searchSubmit }
+            unitToggle = { unitToggle }
+            setUnitToggle = { setUnitToggle }
             /> 
+
             <DetailedWeather  
             data = { currentWeather }
+            unitToggle = { unitToggle }
             />
           </div>
         )}
 
         <Forecast 
         data = { forecastWeather }
+        unitToggle = { unitToggle }
         />
 
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import fromUnixTime from 'date-fns/fromUnixTime'
@@ -7,7 +7,7 @@ import {
     TextSmall,
     TextMedium,
     TextLarge
-} from "../shared/Text";
+} from "../shared/SharedComponents";
 
 // Styled Components.
 const BasicWeatherDiv = styled.div`
@@ -18,15 +18,24 @@ const BasicWeatherDiv = styled.div`
     padding: 15px;
 `
 
-const BasicWeather = ({ data }) => {
+const BasicWeather = ({ data, searchSubmit, unitToggle, setUnitToggle}) => {
+
+    const [searchData, setSearchData ] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        searchSubmit(searchData);
+        setSearchData("");
+    }
 
     // Parse Data.
     let weather_type = data.weather[0].main;
     let location = `${data.name}, ${data.sys.country}`;
     let date = fromUnixTime(data.dt).toLocaleDateString('en-US');
     let time = fromUnixTime(data.dt).toLocaleTimeString('en-US');
-    let display_temp = `${Math.round(data.main.temp)}° F `;
+    let display_temp = `${Math.round(data.main.temp)}° ${unitToggle ? "F" : "C"}`;
     let icon_src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+
 
 
     return (
@@ -37,6 +46,24 @@ const BasicWeather = ({ data }) => {
             <TextSmall> { time }</TextSmall>
             <TextLarge> { display_temp } </TextLarge>
             <img  src={icon_src} alt="weather_icon"/>
+
+            <button onClick={() => {setUnitToggle(!unitToggle)}}> {unitToggle ? "View Metric" : "View Imperial"} </button>
+
+            <form onSubmit={handleSubmit}>
+                <input 
+                name="search"
+                type="text"
+                placeholder="Search new location"
+                value={searchData}
+                onChange={e => setSearchData(e.target.value)}
+                />
+
+                <input
+                type="submit"
+                value="Go!"
+                />
+            </form>
+
         </BasicWeatherDiv>
     )
 }
